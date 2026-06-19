@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnLah Bot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="phone">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="avatar">🤖</div>
+        <div class="header-info">
+            <h1>LearnLah Bot</h1>
+            <span class="online-status">
+                <span class="online-dot"></span> Online
+            </span>
+        </div>
+    </div>
+
+    <!-- Chat area -->
+    <div class="chat-container" id="chat-container">
+
+        <!-- Introduction -->
+        <div class="message-row">
+            <div class="bot-avatar">🤖</div>
+            <div class="message bot-message">
+                <p>👋 Hi! I'm LearnLah Bot, your personal Malay language companion!</p>
+                <br>
+                <p>Here are some things I can do:</p>
+                <p>📖 Tell you the meaning of Malay words</p>
+                <p>🔄 Give you synonyms and antonyms</p>
+                <p>✍️ Show you how to use a word in a sentence</p>
+                <p>💬 Chat with you to practice Malay</p>
+                <br>
+                <p>Just type anything and I'll help you!</p>
+            </div>
+        </div>
+
+<!-- Word of the Day -->
+        <div class="message-row">
+            <div class="bot-avatar">🤖</div>
+            <div class="message bot-message wotd">
+                <p>🌅 Today's Word of the Day — {{ today }}</p>
+                <br>
+                <p>{{ wotd | replace('\n', '<br>') | safe }}</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Input -->
+    <div class="input-container">
+        <input type="text" id="user-input" placeholder="Type anything and I'll help you!" />
+        <button onclick="sendMessage()">➤</button>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById("user-input").addEventListener("keypress", function(e) {
+        if (e.key === "Enter") sendMessage();
+    });
+
+    function sendMessage() {
+        const input = document.getElementById("user-input");
+        const message = input.value.trim();
+        if (!message) return;
+
+        addMessage(message, "user");
+        input.value = "";
+
+        fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: message })
+        })
+        .then(res => res.json())
+        .then(data => {
+            addMessage(data.response, "bot");
+        });
+    }
+
+    function addMessage(text, sender) {
+        const container = document.getElementById("chat-container");
+
+        const row = document.createElement("div");
+        row.className = "message-row" + (sender === "user" ? " user" : "");
+
+        if (sender === "bot") {
+            const avatar = document.createElement("div");
+            avatar.className = "bot-avatar";
+            avatar.innerText = "🤖";
+            row.appendChild(avatar);
+        }
+
+        const bubble = document.createElement("div");
+        bubble.className = "message " + (sender === "bot" ? "bot-message" : "user-message");
+
+        // Convert markdown to HTML
+        text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        text = text.replace(/\n/g, '<br>');
+        bubble.innerHTML = text;
+
+        row.appendChild(bubble);
+        container.appendChild(row);
+        container.scrollTop = container.scrollHeight;
+    }
+</script>
+
+</body>
+</html>
