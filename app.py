@@ -151,11 +151,11 @@ def submit_quiz_answer(user_answer):
 
 @app.route("/")
 def home():
-    wotd = get_word_of_the_day()
+    try:
+        wotd = get_word_of_the_day()
+    except Exception as e:
+        wotd = "Word: Rajin\nMeaning: Hardworking, diligent\nExample: Dia seorang pelajar yang rajin. (She is a hardworking student.)\nSynonym: Tekun\nAntonym: Malas"
     today = date.today().strftime("%d %B %Y")
-    wotd_word = extract_malay_word("word of the day", wotd)
-    if wotd_word and wotd_word not in learned_words:
-        learned_words.append(wotd_word)
     return render_template("index.html", wotd=wotd, today=today)
 
 @app.route("/chat", methods=["POST"])
