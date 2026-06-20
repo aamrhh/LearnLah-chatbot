@@ -53,7 +53,7 @@
             <div class="message bot-message wotd">
                 <p>🌅 Today's Word of the Day — {{ today }}</p>
                 <br>
-                <p>{{ wotd | replace('\n', '<br>') | safe }}</p>
+                <p>{{ wotd | replace('\n', '<br>') | replace('**', '') | safe }}</p>
             </div>
         </div>
 
