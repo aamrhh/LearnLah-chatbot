@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 
-# API Key — loaded from .env file
+# API Key - loaded from .env file
 load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
@@ -28,7 +28,10 @@ Rules:
 - Always give examples when explaining words
 - Be friendly and encouraging
 - Always check and correct spelling mistakes in Malay words
-- Follow Kamus Dewan Bahasa dan Pustaka (DBP) standards
+- Follow Kamus Dewan Bahasa dan Pustaka (DBP) standards STRICTLY
+- Only use standard Bahasa Malaysia (Malaysian Malay) — NEVER use Indonesian words
+- For synonyms and antonyms, only suggest words found in Kamus Dewan Bahasa dan Pustaka
+- If a word only exists in Indonesian and not in Malaysian Malay, say so clearly
 - If user asks something not related to Malay, politely redirect them
 """
 

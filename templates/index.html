@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LearnLah Bot</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 </head>
 <body>
 
@@ -12,7 +13,9 @@
 
     <!-- Header -->
     <div class="header">
-        <div class="avatar">🤖</div>
+        <div class="avatar">
+            <span class="material-symbols-outlined">smart_toy</span>
+        </div>
         <div class="header-info">
             <h1>LearnLah Bot</h1>
             <span class="online-status">
@@ -26,7 +29,9 @@
 
         <!-- Introduction -->
         <div class="message-row">
-            <div class="bot-avatar">🤖</div>
+            <div class="bot-avatar">
+                <span class="material-symbols-outlined" style="font-size:16px;">smart_toy</span>
+            </div>
             <div class="message bot-message">
                 <p>👋 Hi! I'm LearnLah Bot, your personal Malay language companion!</p>
                 <br>
@@ -42,7 +47,9 @@
 
 <!-- Word of the Day -->
         <div class="message-row">
-            <div class="bot-avatar">🤖</div>
+            <div class="bot-avatar">
+                <span class="material-symbols-outlined" style="font-size:16px;">smart_toy</span>
+            </div>
             <div class="message bot-message wotd">
                 <p>🌅 Today's Word of the Day — {{ today }}</p>
                 <br>
@@ -54,7 +61,7 @@
 
     <!-- Input -->
     <div class="input-container">
-        <input type="text" id="user-input" placeholder="Type anything and I'll help you!" />
+        <input type="text" id="user-input" placeholder="Type a message..." />
         <button onclick="sendMessage()">➤</button>
     </div>
 
@@ -93,7 +100,7 @@
         if (sender === "bot") {
             const avatar = document.createElement("div");
             avatar.className = "bot-avatar";
-            avatar.innerText = "🤖";
+            avatar.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;">smart_toy</span>';
             row.appendChild(avatar);
         }
 

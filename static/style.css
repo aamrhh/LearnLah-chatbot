@@ -27,17 +27,18 @@ body {
 
 /* Header */
 .header {
-    background-color: #1a3c5e;
+    background-color: white;
     padding: 16px 20px;
     display: flex;
     align-items: center;
     gap: 12px;
+    border-bottom: 1px solid #eee;
 }
 
 .avatar {
     width: 42px;
     height: 42px;
-    background-color: #2a5a8e;
+    background-color: #1a3c5e;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -46,13 +47,13 @@ body {
 }
 
 .header-info h1 {
-    color: white;
+    color: #1a3c5e;
     font-size: 16px;
     font-weight: 600;
 }
 
 .online-status {
-    color: #4cff91;
+    color: #3ab56e;
     font-size: 12px;
     display: flex;
     align-items: center;
@@ -62,7 +63,7 @@ body {
 .online-dot {
     width: 8px;
     height: 8px;
-    background-color: #4cff91;
+    background-color: #3ab56e;
     border-radius: 50%;
     display: inline-block;
 }
@@ -178,4 +179,7 @@ body {
 .chat-container::-webkit-scrollbar-thumb {
     background-color: #ccc;
     border-radius: 4px;
+}
+.material-symbols-outlined {
+    color: white;
 }
